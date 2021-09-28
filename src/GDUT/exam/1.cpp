@@ -39,9 +39,11 @@ int main() {
     queue.front = 0;
     queue.maxSize = 6;
     queue.tag = 0;
-    ElemType param = {1};
-    char* enCQueue_result = StatusEnCQueue(queue, param);
-    printf("Value of var[%d] = %d\n", 0, *(arr + 0));
-    printf("Value of var[%d] = %d\n", 1, *(arr + 1));
+    for (int i = 0; i < 7; ++i){
+        StatusEnCQueue(queue, {i});
+    }
+    for (int i = 0; i < queue.maxSize; ++i){
+        printf("Value of var[%d] = %d\n", i, *(arr + i));
+    }
     return 0;
 };
