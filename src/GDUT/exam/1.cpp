@@ -20,14 +20,14 @@ typedef struct {
 
 char *StatusEnCQueue(CTagQueue &Q, ElemType x) {
     //判断是否队满
-    if ((Q.rear + 1) % Q.maxSize == Q.front) {
+    if (Q.rear == Q.front && Q.tag == 1) {
         strcpy_s(result, "ERROR");
         return result;
     }
     *(Q.elem + Q.rear) = x;
     Q.rear = (Q.rear + 1) % Q.maxSize;
     Q.tag = 1;
-    strcpy(result, "OK");
+    strcpy_s(result, "OK");
     return result;
 }
 
@@ -39,11 +39,12 @@ int main() {
     queue.front = 0;
     queue.maxSize = 6;
     queue.tag = 0;
-    for (int i = 0; i < 7; ++i){
-        StatusEnCQueue(queue, {i});
+    for (int i = 0; i < 7; ++i) {
+        printf("EnQueue %d, front:[%d], rear:[%d] result:[%s]\n", i, queue.front, queue.rear,
+               StatusEnCQueue(queue, {i}));
     }
-    for (int i = 0; i < queue.maxSize; ++i){
-        printf("Value of var[%d] = %d\n", i, *(arr + i));
+    for (int i = 0; i < queue.maxSize; ++i) {
+        printf("Value of var[%d] = %d\n", i, (arr + i)->value);
     }
     return 0;
 };
