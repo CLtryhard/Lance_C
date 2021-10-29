@@ -1,7 +1,7 @@
 //
 // Created by Lance on 2021/9/24.
 //
-#include <stdlib.h>
+#include <cstdlib>
 
 /* 先序遍历(PreOrder)
 * 中序遍历(InOrder)
@@ -46,17 +46,17 @@ void LevelOrder(BiTree T) {
 
 /* 辅助全局变量,用于查找结点p的前驱(或者也可以传引用) */
 BiTNode *p;//p指向目标结点
-BiTNode *pre = NULL;//指向当前访问结点的前驱
-BiTNode *final = NULL;//用于记录最终结果
-ThreadNode *threadTreePre = NULL;
+BiTNode *pre = nullptr;//指向当前访问结点的前驱
+BiTNode *final = nullptr;//用于记录最终结果
+ThreadNode *threadTreePre = nullptr;
 
 void visit(ThreadNode *q) {
-    if (q->lchild == NULL)//左子树为空,建立前驱线索
+    if (q->lchild == nullptr)//左子树为空,建立前驱线索
     {
         q->lchild = threadTreePre;
         q->ltag = 1;
     }
-    if (threadTreePre != NULL && pre->rchild == NULL) {
+    if (threadTreePre != nullptr && pre->rchild == nullptr) {
         threadTreePre->rchild = q;
         threadTreePre->rtag = 1;
     }
@@ -65,7 +65,7 @@ void visit(ThreadNode *q) {
 
 /* 中序线索化 */
 void InThread(ThreadTree T) {
-    if (T != NULL) {
+    if (T != nullptr) {
         InThread(T->lchild);
         visit(T);
         InThread(T->rchild);
@@ -73,10 +73,10 @@ void InThread(ThreadTree T) {
 }
 
 void CreateInThread(ThreadTree T) {
-    threadTreePre = NULL;
-    if (T != NULL) {
+    threadTreePre = nullptr;
+    if (T != nullptr) {
         InThread(T);
-        if (threadTreePre->rchild == NULL) {
+        if (threadTreePre->rchild == nullptr) {
             threadTreePre->rtag = 1;//处理遍历的最后一个结点
         }
     }
@@ -126,8 +126,8 @@ ThreadNode *NextNode(ThreadNode *p) {
 	空间复杂度O(1)
 */
 void Inorder(ThreadNode *T) {
-    for (ThreadNode *p = Firstnode(T); p != NULL; p = NextNode(p)) {
-        visit(p);
+    for (ThreadNode *pThreadNode = Firstnode(T); pThreadNode != nullptr; pThreadNode = NextNode(pThreadNode)) {
+        visit(pThreadNode);
     }
 }
 
@@ -139,12 +139,12 @@ void Inorder(ThreadNode *T) {
    有右孩子,则后继为右孩子
 */
 ThreadNode *PreOrderNextNode(ThreadNode *T) {
-    if (T->ltag == 0 && T->lchild != NULL) {
+    if (T->ltag == 0 && T->lchild != nullptr) {
         return T->lchild;
     }
 
-    if (T->rtag == 0 && T->rchild != NULL) {
+    if (T->rtag == 0 && T->rchild != nullptr) {
         return T->rchild;
     }
-    return NULL;
+    return nullptr;
 }

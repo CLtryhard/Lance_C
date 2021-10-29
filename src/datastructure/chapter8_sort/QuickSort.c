@@ -17,6 +17,7 @@ int main() {
     printf("init arr:");
     printArr(arr);
     QuickSort(arr, 0, 7);
+    return 0;
 }
 
 /* 选择一个元素作为基准元素(枢轴),将待排序序列划分成左右两个部分 */
