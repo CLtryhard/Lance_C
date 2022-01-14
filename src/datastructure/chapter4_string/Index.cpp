@@ -1,7 +1,7 @@
 //
 // Created by Lance on 2021/9/24.
 //
-#include "串的链式存储.cpp"
+#include "LinkedString.cpp"
 
 /* 朴素模式匹配,S为主串,T为模式串,最坏时间复杂度为O(mn) */
 int index(SString S, SString T);

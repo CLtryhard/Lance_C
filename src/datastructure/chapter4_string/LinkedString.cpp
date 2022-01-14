@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define ONE_BETY_MAX_LEN 255
+#define ONE_BYTE_MAX_LEN 255
 
 /* 串的顺序存储,舍弃第一个位置ch[0],另外声明一个成员变量存放Length */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
     void InitString(SString &S) {
         //用malloc函数申请一片连续的存储空间
-        S.ch = (char *) malloc(ONE_BETY_MAX_LEN * sizeof(char));
+        S.ch = (char *) malloc(ONE_BYTE_MAX_LEN * sizeof(char));
         S.length = 0;
     }
 } SString;
@@ -32,7 +32,7 @@ bool SubString(SString &Sub, SString S, int pos, int len);
 int StrCompare(SString S, SString T);
 
 /* 定位操作.若主串S中存在与串T值相同的子串,则返回它在主串S中第一次出现的位置;否则函数值为0 */
-int index(SString S, SString T);
+int index_Linked(SString S, SString T);
 
 int INDEX_KMP(SString S, SString T, int next[]);
 
@@ -58,7 +58,7 @@ int StrCompare(SString S, SString T) {
     return S.length - T.length;
 }
 
-int index(SString S, SString T) {
+int index_Linked(SString S, SString T) {
     int i = 1, n = S.length, m = T.length;
     SString sub;//用于暂存子串
     while (i <= n - m + 1) {

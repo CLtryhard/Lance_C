@@ -12,8 +12,8 @@
 /* 二叉树的节点(链式存储) */
 typedef struct BiTNode {
     char data;
-    struct BiTNode *lchidld, *rchild;
-} BiTnode, BiTree;
+    struct BiTNode *lchild, *rchild;
+} BiTree;
 
 /* 链式队列节点 */
 typedef struct LinkNode {
@@ -85,7 +85,7 @@ void CreateInThread(ThreadTree T) {
 /* 找到以P为根的子树中,第一个被中序遍历的结点
    中序遍历时,某节点的后驱结点必定为右子树中最左下角的结点(ltag为0时)
 */
-ThreadNode *Firstnode(ThreadNode *p) {
+ThreadNode *FirstNode(ThreadNode *p) {
     //循环找到最左下结点(不一定是叶子结点)
     while (p->ltag == 0) {
         p = p->lchild;
@@ -97,7 +97,7 @@ ThreadNode *Firstnode(ThreadNode *p) {
 ThreadNode *NextNode(ThreadNode *p) {
     //右子树中最左下结点
     if (p->rtag == 0) {
-        return Firstnode(p->rchild);
+        return FirstNode(p->rchild);
     }
     return p->rchild;
 }
@@ -126,7 +126,7 @@ ThreadNode *NextNode(ThreadNode *p) {
 	空间复杂度O(1)
 */
 void Inorder(ThreadNode *T) {
-    for (ThreadNode *pThreadNode = Firstnode(T); pThreadNode != nullptr; pThreadNode = NextNode(pThreadNode)) {
+    for (ThreadNode *pThreadNode = FirstNode(T); pThreadNode != nullptr; pThreadNode = NextNode(pThreadNode)) {
         visit(pThreadNode);
     }
 }
